@@ -1,8 +1,7 @@
 <?php
 // CRUD OPERATION IMPLEMENTED
 
-require('classes/Database.php');
-require('classes/Article.php');
+require('include/init.php');
 
 $db = new Database();
 $conn = $db->getConn();
