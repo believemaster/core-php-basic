@@ -2,8 +2,7 @@
 
 require('include/init.php');
 
-$db = new Database();
-$conn = $db->getConn();
+$conn = require('include/db.php');
 
 $articles = Article::getAll($conn);
 
