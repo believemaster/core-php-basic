@@ -4,7 +4,8 @@ require('include/init.php');
 
 $conn = require('include/db.php');
 
-$articles = Article::getAll($conn);
+$paginator = new Paginator(1, 3);
+$articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
 ?>
 
