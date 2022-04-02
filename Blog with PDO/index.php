@@ -4,7 +4,14 @@ require('include/init.php');
 
 $conn = require('include/db.php');
 
-$paginator = new Paginator(1, 3);
+// if(isset($_GET['page'])) {
+//   $paginator = new Paginator($_GET['page'], 3);
+// } else {
+//   $paginator = new Paginator(1, 3);
+// }
+// $paginator = new Paginator(isset($_GET['page']) ? $_GET['page'] : 1, 3);  // For Pagination Pages this code is simpler version of above code with ternary operator
+
+$paginator = new Paginator($_GET['page'] ?? 1, 3); // In php 7 with null coalasing operator.
 $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
 ?>

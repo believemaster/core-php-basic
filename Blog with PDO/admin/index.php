@@ -5,7 +5,7 @@ Auth::requireLogin();
 
 $conn = require('../include/db.php');
 
-$articles = Article::getPage($conn, 3, 0);
+$articles = Article::getAll($conn);
 
 ?>
 
