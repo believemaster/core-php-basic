@@ -1,6 +1,7 @@
 <?php
 
 require('../include/init.php');
+Auth::requireLogin();
 
 $conn = require('../include/db.php');
 
@@ -16,20 +17,24 @@ $articles = Article::getAll($conn);
 <?php else: ?>
   <p>You are not logged in. <a href="login.php">Login</a> </p>
 <?php endif; ?>
-
+<h3>Admin</h3>
 <?php if (empty($articles)): ?>
   <p>No Articles Found.</p>
 <?php else: ?>
-  <ul>
+  <table>
+    <thead>
+      <th>Title</th>
+    </thead>
+    <tbody>
     <?php foreach ($articles as $article): ?>
-      <li>
-        <article class="">
-          <h2><a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a> </h2>
-          <p><?= htmlspecialchars($article['content']); ?></p>
-        </article>
-      </li>
+      <tr>
+        <td class="">
+          <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a
+        </td>
+      </tr>
     <?php endforeach; ?>
-  </ul>
+    </tbody>
+  </table>
 <?php endif; ?>
 
 <?php include('../include/footer.php'); ?>
