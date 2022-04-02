@@ -20,6 +20,18 @@
     public $offset;
 
     /*
+    * Previous page number
+    * @var integer
+    */
+    public $previous;
+
+    /*
+    * Next page number
+    * @var integer
+    */
+    public $next;
+
+    /*
     * Constructor
     *
     * @param integer $page Page Number
@@ -36,7 +48,13 @@
           'min_range' => 1
         ]
       ]);
-      
+
+      if ($page > 1) {
+        $this->previous = $page - 1;
+      }
+
+      $this->next = $page + 1;
+
       $this->offset = $records_per_page * ($page - 1);
     }
   }

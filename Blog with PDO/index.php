@@ -31,6 +31,20 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
       </li>
     <?php endforeach; ?>
   </ul>
+  <nav>
+    <ul>
+      <li>
+        <?php if($paginator->previous) : ?>
+          <a href="?page=<?= $paginator->previous; ?>">Previous</a>
+        <?php else: ?>
+          Previous
+        <?php endif; ?>
+      </li>
+      <li>
+        <a href="?page=<?= $paginator->next; ?>">Next</a>
+      </li>
+    </ul>
+  </nav>
 <?php endif; ?>
 
 <?php include('include/footer.php'); ?>
