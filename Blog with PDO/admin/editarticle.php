@@ -35,6 +35,6 @@ if(isset($_GET['id']))
 
 <h2>Edit Article</h2>
 
-<?php require('../include/articleform.php') ?>
+<?php require('include/articleform.php') ?>
 
 <?php require('../include/footer.php') ?>
