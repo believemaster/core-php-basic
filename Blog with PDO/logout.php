@@ -4,6 +4,6 @@ require('include/init.php');
 
 Auth::logout();
 
-Url::redirect('/new blog/');
+Url::redirect('/Blog with PDO/');
 
  ?>

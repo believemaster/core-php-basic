@@ -11,13 +11,9 @@ $articles = Article::getAll($conn);
 
 <?php include("../include/header.php") ?>
 
-<?php if(Auth::isLoggedIn()): ?>
-  <p>You are logged in. <a href="logout.php">Logout</a> </p>
-  <p><a href="newarticle.php">New Article</a></p>
-<?php else: ?>
-  <p>You are not logged in. <a href="login.php">Login</a> </p>
-<?php endif; ?>
 <h3>Admin</h3>
+<p><a href="newarticle.php">New Article</a></p>
+
 <?php if (empty($articles)): ?>
   <p>No Articles Found.</p>
 <?php else: ?>
