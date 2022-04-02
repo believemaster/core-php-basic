@@ -5,7 +5,8 @@ Auth::requireLogin();
 
 $conn = require('../include/db.php');
 
-$articles = Article::getAll($conn);
+$paginator = new Paginator($_GET['page'] ?? 1, 3, Article::getTotal($conn)); // In php 7 with null coalasing operator.
+$articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
 ?>
 
@@ -31,6 +32,9 @@ $articles = Article::getAll($conn);
     <?php endforeach; ?>
     </tbody>
   </table>
+
+  <?php require('../include/pagination.php'); ?>
+
 <?php endif; ?>
 
 <?php include('../include/footer.php'); ?>
