@@ -11,7 +11,7 @@ $conn = require('include/db.php');
 // }
 // $paginator = new Paginator(isset($_GET['page']) ? $_GET['page'] : 1, 3);  // For Pagination Pages this code is simpler version of above code with ternary operator
 
-$paginator = new Paginator($_GET['page'] ?? 1, 3); // In php 7 with null coalasing operator.
+$paginator = new Paginator($_GET['page'] ?? 1, 3, Article::getTotal($conn)); // In php 7 with null coalasing operator.
 $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
 ?>
@@ -41,7 +41,11 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
         <?php endif; ?>
       </li>
       <li>
-        <a href="?page=<?= $paginator->next; ?>">Next</a>
+        <?php if($paginator->next) : ?>
+          <a href="?page=<?= $paginator->next; ?>">Next</a>
+        <?php else: ?>
+          Next
+        <?php endif; ?>
       </li>
     </ul>
   </nav>

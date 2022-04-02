@@ -228,6 +228,18 @@
       }
     }
 
+    /*
+    * Get a count of the total number of records
+    *
+    * @param object $conn Connection to the database
+    *
+    * @return integer the total number of records
+    */
+    public static function getTotal($conn)
+    {
+      return $conn->query('SELECT COUNT(*) FROM article')->fetchColumn();
+    }
+
   }
 
  ?>
