@@ -40,6 +40,9 @@ if(isset($_GET['id']))
         default:
           throw new Exception('An Error Occured');
       }
+      if($_FILES['file']['size'] > 1000000) {
+        throw new Exception('File is too large');
+      }
     } catch (Exception $e) {
       echo $e->getMessage();
     }
