@@ -54,7 +54,9 @@ if(isset($_GET['id']))
 
       $pathinfo = pathinfo($_FILES['file']['name']);
       $base = $pathinfo['filename'];
+
       $base = preg_replace('/[^a-zA-Z0-9_-]/', '_', $base);
+      $base = mb_substr($base, 0, 200); // restrict the name of uploaded file
 
       $filename = $base . "." . $pathinfo['extension'];
       $destination = "../uploads/$filename";
@@ -63,12 +65,14 @@ if(isset($_GET['id']))
       while(file_exists($destination)) {
         $filename = $base . "-$i." . $pathinfo['extension'];
         $destination = "../uploads/$filename";
-        
+
         $i++;
       }
 
       if(move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
-        echo "File uploaded";
+        if($article->setImageFile($conn, $filename)) {
+          Url::redirect("/Blog with PDO/admin/article.php?id={$article->id}");
+        }
       } else {
         throw new Exception('Unable to move uploaded file');
       }
