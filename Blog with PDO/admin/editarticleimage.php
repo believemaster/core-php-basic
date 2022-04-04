@@ -52,8 +52,14 @@ if(isset($_GET['id']))
         throw new Exception('Invalid file type');
       }
 
-      $destination = "../uploaded/". $_FILES['file']['name'];
-      if(move_uploaded_file($_FILE['file']['tmp_name'], $destination)) {
+      $pathinfo = pathinfo($_FILES['file']['name']);
+      $base = $pathinfo['filename'];
+      $base = preg_replace('/[^a-zA-Z0-9_-]', '_', $base);
+
+      $filename = $base . "." . $pathinfo['extension'];
+      $destination = "../uploads/$filename";
+
+      if(move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
         echo "File uploaded";
       } else {
         throw new Exception('Unable to move uploaded file');
