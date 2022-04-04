@@ -70,8 +70,16 @@ if(isset($_GET['id']))
       }
 
       if(move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
+
+        $previous_image = $article->image_file;
+
         if($article->setImageFile($conn, $filename)) {
-          Url::redirect("/Blog with PDO/admin/article.php?id={$article->id}");
+
+          if ($previous_image) {
+            unlink("../uploads/$previous_image");
+          }
+
+          Url::redirect("/Blog with PDO/admin/editarticleimage.php?id={$article->id}");
         }
       } else {
         throw new Exception('Unable to move uploaded file');
