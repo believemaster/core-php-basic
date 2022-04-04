@@ -88,6 +88,11 @@ if(isset($_GET['id']))
 <?php require('../include/header.php') ?>
 
 <h2>Edit Article Image</h2>
+
+<?php if ($article->image_file): ?>
+  <img src="/Blog with PDO/uploads/<?= $article->image_file; ?>">
+<?php endif; ?>
+
 <form method="post" enctype="multipart/form-data">
   <div>
     <label for="file">Image:</label>
