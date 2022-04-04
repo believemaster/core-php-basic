@@ -54,10 +54,18 @@ if(isset($_GET['id']))
 
       $pathinfo = pathinfo($_FILES['file']['name']);
       $base = $pathinfo['filename'];
-      $base = preg_replace('/[^a-zA-Z0-9_-]', '_', $base);
+      $base = preg_replace('/[^a-zA-Z0-9_-]/', '_', $base);
 
       $filename = $base . "." . $pathinfo['extension'];
       $destination = "../uploads/$filename";
+
+      $i=1;
+      while(file_exists($destination)) {
+        $filename = $base . "-$i." . $pathinfo['extension'];
+        $destination = "../uploads/$filename";
+        
+        $i++;
+      }
 
       if(move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
         echo "File uploaded";
