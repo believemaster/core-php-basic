@@ -52,6 +52,13 @@ if(isset($_GET['id']))
         throw new Exception('Invalid file type');
       }
 
+      $destination = "../uploaded/". $_FILES['file']['name'];
+      if(move_uploaded_file($_FILE['file']['tmp_name'], $destination)) {
+        echo "File uploaded";
+      } else {
+        throw new Exception('Unable to move uploaded file');
+      }
+
     } catch (Exception $e) {
       echo $e->getMessage();
     }
