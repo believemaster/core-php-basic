@@ -18,7 +18,6 @@ if(isset($_GET['id']))
 }
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    var_dump($_FILES);
 
     try {
       if(empty($_FILES)) {
@@ -40,10 +39,13 @@ if(isset($_GET['id']))
         default:
           throw new Exception('An Error Occured');
       }
+
+      // restrict the file size
       if($_FILES['file']['size'] > 1000000) {
         throw new Exception('File is too large');
       }
 
+      // restrict the file type
       $mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
       $finfo = finfo_open(FILEINFO_MIME_TYPE);
       $mime_type = finfo_file($finfo, $_FILES['file']['tmp_name']);
@@ -52,11 +54,14 @@ if(isset($_GET['id']))
         throw new Exception('Invalid file type');
       }
 
+      // move the uploaded file
       $pathinfo = pathinfo($_FILES['file']['name']);
       $base = $pathinfo['filename'];
 
+      // replace any characters that aren't letters, numbers, underscores or hyphens with an undescore
       $base = preg_replace('/[^a-zA-Z0-9_-]/', '_', $base);
-      $base = mb_substr($base, 0, 200); // restrict the name of uploaded file
+      // restrict the name of uploaded file to 200 characters
+      $base = mb_substr($base, 0, 200);
 
       $filename = $base . "." . $pathinfo['extension'];
       $destination = "../uploads/$filename";
@@ -66,6 +71,7 @@ if(isset($_GET['id']))
         $filename = $base . "-$i." . $pathinfo['extension'];
         $destination = "../uploads/$filename";
 
+        // add a numeric suffix to the filename to avoid overwrting existing files
         $i++;
       }
 
@@ -86,7 +92,7 @@ if(isset($_GET['id']))
       }
 
     } catch (Exception $e) {
-      echo $e->getMessage();
+      $error = $e->getMessage();
     }
 
   }
@@ -99,6 +105,11 @@ if(isset($_GET['id']))
 
 <?php if ($article->image_file): ?>
   <img src="/Blog with PDO/uploads/<?= $article->image_file; ?>">
+  <a href="deletearticleimage.php?id=<?= $article->id ?>">Delete</a>
+<?php endif; ?>
+
+<?php if (isset($error)) : ?>
+  <p><?= $error ?></p>
 <?php endif; ?>
 
 <form method="post" enctype="multipart/form-data">
