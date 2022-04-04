@@ -19,6 +19,21 @@ if(isset($_GET['id']))
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     var_dump($_FILES);
+
+    try {
+      switch($_FILES['file']['error']) {
+        case UPLOAD_ERR_OK:
+          break;
+        case UPLOAD_ERR_NO_FILE:
+          throw new Exception('No file uploaded');
+          break;
+        default:
+          throw new Exception('An Error Occured');
+      }
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    }
+
   }
 
 ?>
@@ -26,10 +41,10 @@ if(isset($_GET['id']))
 <?php require('../include/header.php') ?>
 
 <h2>Edit Article Image</h2>
-<form method="post" enctype="multipart/formdata">
+<form method="post" enctype="multipart/form-data">
   <div>
     <label for="file">Image:</label>
-    <input type="file" name="" value="" id="file">
+    <input type="file" name="file" id="file">
   </div>
 
   <button>Upload</button>
