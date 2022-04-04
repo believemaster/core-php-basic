@@ -43,6 +43,15 @@ if(isset($_GET['id']))
       if($_FILES['file']['size'] > 1000000) {
         throw new Exception('File is too large');
       }
+
+      $mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $mime_type = finfo_file($finfo, $_FILES['file']['tmp_name']);
+
+      if (! in_array($mime_type, $mime_types)) {
+        throw new Exception('Invalid file type');
+      }
+
     } catch (Exception $e) {
       echo $e->getMessage();
     }
