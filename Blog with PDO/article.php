@@ -22,7 +22,7 @@ if(isset($_GET['id']))
       <?php if ($article[0]['category_name']): ?>
         <p>Categories:
           <?php foreach ($article as $a): ?>
-            <?= htmlspecialchars($article[0]['category_name']); ?>
+            <?= htmlspecialchars($a['category_name']); ?>
           <?php endforeach; ?>
         </p>
       <?php endif; ?>
