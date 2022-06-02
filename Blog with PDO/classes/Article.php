@@ -117,6 +117,54 @@
     }
 
     /**
+    * Get article record based on the ID along with associated categories, if any
+    *
+    * @param object $conn Connection to the database
+    * @param integer $id the article ID
+    *
+    * @return array The article data with categories
+    */
+    public static function getWithCategories($conn, $id)
+    {
+      $sql = "SELECT article.*, category.name AS category_name
+              FROM article
+              LEFT JOIN article_category
+              ON article.id = article_category.article_id
+              LEFT JOIN category
+              ON article_category.category_id = category.id
+              WHERE article.id = :id";
+
+      $stmt = $conn->prepare($sql);
+      $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+      $stmt->execute();
+
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+    * Get the articles category
+    *
+    * @param object $conn Connection to the database
+    *
+    * @return array The category data
+    */
+    public function getCategories($conn) {
+      $sql = "SELECT category.*
+              FROM category
+              JOIN article_category
+              ON category.id = article_category.category_id
+              WHERE article_id = :id";
+
+      $stmt = $conn->prepare($sql);
+      $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+      $stmt->execute();
+
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
     * Update the articel with its current property values
     *
     * @param object $conn Connection to the database
@@ -147,6 +195,28 @@
           return $stmt->execute();
       } else {
         return false;
+      }
+    }
+
+    /**
+    * Set the article categories
+    *
+    * @param object $conn Connection to the database
+    * @param array $ids Category IDs
+    *
+    * @return void
+    */
+    public function setCategories($conn, $ids)
+    {
+      if($ids) {
+        $sql = "INSERT IGNORE INTO article_category (article_id, category_id)
+                VALUES ({$this->id}, :category_id)";
+        $stmt = $conn->prepare($sql);
+
+        foreach($ids as $id) {
+          $stmt->bindValue(':category_id', $id, PDO::PARAM_INT);
+          $stmt->execute();
+        }
       }
     }
 
