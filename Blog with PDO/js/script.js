@@ -49,3 +49,17 @@ $(".publish").on('click', function(e){
 $("#published_at").datepicker({
   format: 'Y-m-d H:i:s'
 });
+
+$("#formContact").validate({
+  rules: {
+    email: {
+      required: true
+    },
+    subject: {
+      required: true
+    },
+    message: {
+      dateTime: true
+    }
+  }
+})
