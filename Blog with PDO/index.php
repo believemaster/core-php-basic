@@ -26,7 +26,7 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset, true)
       <li>
         <article class="">
           <h2><a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a> </h2>
-          <time datetime=<?= $article[0]['published_at'] ?>>
+          <time datetime="<?= $article[0]['published_at'] ?>">
             <?php
               $dateTime = new DateTime($article['published_at']);
               echo $dateTime->format("j F, Y");

@@ -21,12 +21,26 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
   <table>
     <thead>
       <th>Title</th>
+      <th>Published At</th>
     </thead>
     <tbody>
     <?php foreach ($articles as $article): ?>
       <tr>
         <td class="">
-          <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a
+          <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a>
+        </td>
+        <td>
+          <time datetime="<?= $article['published_at'] ?>">
+            <?php if ($article['published_at']): ?>
+              <?php
+                $dateTime = new DateTime($article['published_at']);
+                echo $dateTime->format("j F, Y");
+              ?>
+            <?php else: ?>
+              Unpublished
+            <?php endif; ?>
+
+          </time>
         </td>
       </tr>
     <?php endforeach; ?>
