@@ -71,18 +71,21 @@
     *
     * @return array An associative array of page of article records
     */
-    public static function getPage($conn, $limit, $offset) {
+    public static function getPage($conn, $limit, $offset, $only_published = false) {
+
+      $condition = $only_published ? ' WHERE published_at IS NOT NULL' : '';
+
       $sql = "SELECT a.*, category.name AS category_name
               FROM (SELECT *
-              FROM article
-              ORDER BY published_at
-              LIMIT :limit
-              OFFSET :offset) AS a
+                    FROM article
+                    $condition
+                    ORDER BY published_at
+                    LIMIT :limit
+                    OFFSET :offset) AS a
               LEFT JOIN article_category
               ON a.id = article_category.article_id
               LEFT JOIN category
-              ON article_category.category_id = category.id"
-              ;
+              ON article_category.category_id = category.id";
 
       $stmt = $conn->prepare($sql);
 
@@ -363,9 +366,11 @@
     *
     * @return integer the total number of records
     */
-    public static function getTotal($conn)
+    public static function getTotal($conn, $only_published = false)
     {
-      return $conn->query('SELECT COUNT(*) FROM article')->fetchColumn();
+      $condition = $only_published ? ' WHERE published_at IS NOT NULL' : '';
+
+      return $conn->query("SELECT COUNT(*) FROM article$condition")->fetchColumn();
     }
 
     /*
