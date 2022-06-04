@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>Ajax Example</h1>
+
     <!-- <p>The time when server executed the page is <time><?= date('g:i:s') ?></time></p> -->
     <p>The time when server executed the page is <time id="currentTime"><?= date('g:i:s') ?></time></p>
 
