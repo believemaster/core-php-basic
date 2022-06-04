@@ -30,17 +30,14 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
           <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a>
         </td>
         <td>
-          <time datetime="<?= $article['published_at'] ?>">
             <?php if ($article['published_at']): ?>
-              <?php
-                $dateTime = new DateTime($article['published_at']);
-                echo $dateTime->format("j F, Y");
-              ?>
+              <time>
+                <?= $article['published_at'] ?>
+              </time>
             <?php else: ?>
               Unpublished
+              <button class="publish" data-id="<?= $article['id'] ?>">Publish</button>
             <?php endif; ?>
-
-          </time>
         </td>
       </tr>
     <?php endforeach; ?>
