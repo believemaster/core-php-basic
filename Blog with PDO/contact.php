@@ -36,10 +36,10 @@
 
       try {
         $email->isSMTP();
-        $email->host        = "your mail server";
+        $email->host        = SMTP_HOST;
         $email->SMTPAuth    = true;
-        $email->Username    = "username";
-        $email->Password    = "password";
+        $email->Username    = SMTP_USER;
+        $email->Password    = SMTP_PASS;
         $email->SMTPSecure  = 'tls';
         $email->Port        = 587;
 
