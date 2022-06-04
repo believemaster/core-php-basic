@@ -6,7 +6,7 @@
   </ul>
 <?php endif; ?>
 
-<form action="" method="post">
+<form action="" method="post" id="formArticle">
   <div>
     <label for="title">Title</label>
     <input type="text" name="title" id="title" placeholder="Article Title" value="<?= htmlspecialchars($article->title); ?>">
