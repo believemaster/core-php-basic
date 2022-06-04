@@ -45,3 +45,7 @@ $(".publish").on('click', function(e){
 
   });
 });
+
+$("#published_at").datepicker({
+  format: 'Y-m-d H:i:s'
+});

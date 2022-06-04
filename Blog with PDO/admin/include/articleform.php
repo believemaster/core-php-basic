@@ -17,7 +17,7 @@
   </div>
   <div class="form-group">
     <label for="published_at">Published Date & Time</label>
-    <input class="form-control" type="datetime-local" name="published_at" id="published_at" value="<?= htmlspecialchars($article->published_at); ?>">
+    <input id="published_at" type="text" class="form-control" name="published_at" value="<?= htmlspecialchars($article->published_at); ?>">
   </div>
   <fieldset>
     <legend>Categories</legend>
