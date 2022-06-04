@@ -9,7 +9,7 @@ $conn = require('../include/db.php');
 
 if(isset($_GET['id']))
 {
-  $article = Article::getWithCategories($conn, $_GET['id']);
+  $article = Article::getWithCategories($conn, $_GET['id'], true);
 } else {
   $article = null;
 }
