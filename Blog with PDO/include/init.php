@@ -21,6 +21,8 @@ function errorHandeler($level, $message, $file, $line) {
 
 function exceptionHandler($exception)
 {
+  http_response_code(500);
+  
   if(SHOW_ERR_DETAIL) {
     echo "<h1>An error occured.</h1>";
     echo "<p>Uncaught Exception: " . get_class($exception) . "</p>";
