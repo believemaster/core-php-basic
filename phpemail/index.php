@@ -19,7 +19,7 @@ try {
   $email->Port        = 587;
 
 
-  $email->setFom('sender@informatice.rg.gd');
+  $email->setFrom('sender@informatice.rg.gd');
   $email->addAddress('sender@informatice.rg.gd');
   $email->subject = 'Email from informative.rf.gd';
   $email->body = 'Hello there';
