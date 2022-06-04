@@ -27,15 +27,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
  <?php endif; ?>
 
  <form action="" method="post">
-   <div>
+   <div class="form-group">
      <label for="username">Username</label>
-     <input id="username" type="text" name="username" value="">
+     <input class="form-control" id="username" type="text" name="username" value="">
    </div>
 
-   <div>
+   <div class="form-group">
      <label for="password">Username</label>
-     <input id="password" type="password" name="password" value="">
+     <input class="form-control" id="password" type="password" name="password" value="">
    </div>
 
-   <button type="submit" name="button">Login</button>
+   <button class="btn btn-outline-dark" type="submit" name="button">Login</button>
  </form>

@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   </head>
   <body>
+    <div class="container">
     <header>
       <h1>My Blogs</h1>
     </header>
     <nav>
-      <ul>
+      <ul class="nav">
+        <li class="nav-item"><a href="/Blog with PDO/" class="nav-link">Home</a> </li>
         <?php if(Auth::isLoggedIn()) : ?>
-          <li><a href="/Blog with PDO/">Home</a> </li>
-          <li><a href="/Blog with PDO/admin/">Admin</a> </li>
-          <li><a href="/Blog with PDO/logout.php">Log Out</a> </li>
+          <li class="nav-item"><a href="/Blog with PDO/admin/" class="nav-link">Admin</a> </li>
+          <li class="nav-item"><a href="/Blog with PDO/logout.php" class="nav-link">Log Out</a> </li>
         <?php else: ?>
-          <li><a href="/Blog with PDO/login.php">Log In</a> </li
+          <li class="nav-item"><a href="/Blog with PDO/login.php" class="nav-link">Log In</a> </li
         <?php endif; ?>
       </ul>
     </nav>
