@@ -11,6 +11,6 @@
   define('SMTP_USER', '');
   define('SMTP_PASS', '');
 
-
+  define('SHOW_ERR_DETAIL', true);
 
 ?>
