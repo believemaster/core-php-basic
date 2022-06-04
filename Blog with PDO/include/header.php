@@ -21,8 +21,9 @@
           <li class="nav-item"><a href="/Blog with PDO/admin/" class="nav-link">Admin</a> </li>
           <li class="nav-item"><a href="/Blog with PDO/logout.php" class="nav-link">Log Out</a> </li>
         <?php else: ?>
-          <li class="nav-item"><a href="/Blog with PDO/login.php" class="nav-link">Log In</a> </li
+          <li class="nav-item"><a href="/Blog with PDO/login.php" class="nav-link">Log In</a> </li>
         <?php endif; ?>
+        <li class="nav-item"><a href="/Blog with PDO/contact.php" class="nav-link">Contact</a> </li>
       </ul>
     </nav>
     <main>
