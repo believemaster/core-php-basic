@@ -105,7 +105,7 @@ if(isset($_GET['id']))
 
 <?php if ($article->image_file): ?>
   <img src="/Blog with PDO/uploads/<?= $article->image_file; ?>">
-  <a href="deletearticleimage.php?id=<?= $article->id ?>">Delete</a>
+  <a class="delete" href="deletearticleimage.php?id=<?= $article->id ?>">Delete</a>
 <?php endif; ?>
 
 <?php if (isset($error)) : ?>
